@@ -520,6 +520,7 @@ let setup ?stop ?config ?(enable = true) () =
 let with_setup ?stop ?config ?(enable = true) () f =
   if enable then (
     let cleanup = setup_ ?stop ?config () in
+    at_exit cleanup;
     Fun.protect ~finally:cleanup f
   ) else
     f ()
